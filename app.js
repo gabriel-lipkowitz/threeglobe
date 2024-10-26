@@ -1,7 +1,7 @@
 import ThreeGlobe from "three-globe";
-import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
+import { TrackballControls } from './node_modules/three/examples/jsm/controls/TrackballControls.js';
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { GLTFLoader } from './node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 
 
     // Gen random data

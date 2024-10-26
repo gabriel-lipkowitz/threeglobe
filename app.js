@@ -1,6 +1,6 @@
 import ThreeGlobe from "three-globe";
-import { TrackballControls } from './TrackballControls.js';
-import { OrbitControls } from './OrbitControls.js';
+// import { TrackballControls } from './TrackballControls.js';
+// import { OrbitControls } from './OrbitControls.js';
 
 import * as THREE from 'three';
 import { GLTFLoader } from './GLTFLoader.js';
@@ -525,10 +525,10 @@ sequentialArcs(cityPairs);
     camera.updateProjectionMatrix();
     camera.position.z = 500;
 
-    const tbControls = new TrackballControls(camera, renderer.domElement);
-    tbControls.minDistance = 101;
-    tbControls.rotateSpeed = 5;
-    tbControls.zoomSpeed = 0.8;
+    // const tbControls = new TrackballControls(camera, renderer.domElement);
+    // tbControls.minDistance = 101;
+    // tbControls.rotateSpeed = 5;
+    // tbControls.zoomSpeed = 0.8;
 
       function animate() {
 
@@ -549,8 +549,8 @@ sequentialArcs(cityPairs);
 
         requestAnimationFrame(function loop(time) {
 
-            tbControls.update();
-            
+            // tbControls.update();
+
             const now = Date.now();
 
             if (now - lastChangeTime > lookAts[currentIndex].duration) {

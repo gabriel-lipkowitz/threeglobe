@@ -1,8 +1,8 @@
 import ThreeGlobe from "three-globe";
-import { TrackballControls } from './node_modules/three/examples/jsm/controls/TrackballControls.js';
+// import { TrackballControls } from './node_modules/three/examples/jsm/controls/TrackballControls.js';
 import * as THREE from 'three';
-import { GLTFLoader } from './node_modules/three/examples/jsm/loaders/GLTFLoader.js';
-
+import { GLTFLoader } from './GLTFLoader.js';
+// import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm//three@0.165.0/examples/jsm/loaders/GLTFLoader.js'
 
     // Gen random data
     const N = 300;
@@ -72,16 +72,16 @@ import { GLTFLoader } from './node_modules/three/examples/jsm/loaders/GLTFLoader
     camera.updateProjectionMatrix();
     camera.position.z = 500;
 
-    // Add camera controls
-    const tbControls = new TrackballControls(camera, renderer.domElement);
-    tbControls.minDistance = 101;
-    tbControls.rotateSpeed = 5;
-    tbControls.zoomSpeed = 0.8;
+    // // Add camera controls
+    // const tbControls = new TrackballControls(camera, renderer.domElement);
+    // tbControls.minDistance = 101;
+    // tbControls.rotateSpeed = 5;
+    // tbControls.zoomSpeed = 0.8;
 
     // Kick-off renderer
     (function animate() { // IIFE
       // Frame cycle
-      tbControls.update();
+    //   tbControls.update();
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
     })();

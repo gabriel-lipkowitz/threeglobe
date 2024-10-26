@@ -1,8 +1,6 @@
 import ThreeGlobe from "three-globe";
-import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
-// import { OrbitControls } from './OrbitControls.js';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-
+import { TrackballControls } from './TrackballControls.js';
+import { OrbitControls } from './OrbitControls.js';
 import * as THREE from 'three';
 import { GLTFLoader } from './GLTFLoader.js';
 // import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm//three@0.165.0/examples/jsm/loaders/GLTFLoader.js'

@@ -3,8 +3,10 @@
   "scripts": {
 
     "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "start": "serve dist -s -l $PORT"
 
-    "start": "node app.js"
+    
 
   },
 

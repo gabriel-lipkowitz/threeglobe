@@ -10,6 +10,12 @@ const gData = [...Array(N).keys()].map(() => ({
   color: ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)]
 }));
 
+const loader = new THREE.TextureLoader();
+
+// Load a texture
+const texture = loader.load('./us_.png');  // Replace 'path_to_your_texture.jpg' with the path to your texture file
+
+
 const world = Globe()
   (document.getElementById('globeViz'))
   .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
@@ -18,7 +24,7 @@ const world = Globe()
   .customLayerData(gData)
   .customThreeObject(d => new THREE.Mesh(
     new THREE.SphereGeometry(d.radius),
-    new THREE.MeshLambertMaterial({ color: d.color })
+    new THREE.MeshLambertMaterial({ map: texture })
   ))
   .customThreeObjectUpdate((obj, d) => {
     Object.assign(obj.position, world.getCoords(d.lat, d.lng, d.alt));

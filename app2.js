@@ -16,7 +16,7 @@ const loader = new THREE.TextureLoader();
 const texture = loader.load('./us_.png');  // Replace 'path_to_your_texture.jpg' with the path to your texture file
 
 
-const world = Globe()
+const world = Globe({ antialias: true })
   (document.getElementById('globeViz'))
   .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
   .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')

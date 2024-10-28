@@ -645,7 +645,7 @@ sequentialArcs(cityPairs);
 
         // renderer.render(scene, camera);
 
-        globe.renderer().render(globe.scene(), globe.camera());
+        // globe.renderer().render(globe.scene(), globe.camera());
 
         
 

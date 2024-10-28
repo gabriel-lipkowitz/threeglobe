@@ -3,7 +3,7 @@ import { TrackballControls } from './TrackballControls.js';
 import { OrbitControls } from './OrbitControls.js';
 import * as THREE from 'three';
 import { GLTFLoader } from './GLTFLoader.js';
-// import Globe from 'globe.gl';
+import Globe from 'globe.gl';
 
 // import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm//three@0.165.0/examples/jsm/loaders/GLTFLoader.js'
 
@@ -240,7 +240,6 @@ const labelToTypeMap = {
     'Puerto Vallarta': 'mexico'
 };
 
-
 export async function initializeGlobe() {
 
     const ARC_REL_LEN = 0.7; // relative to whole arc
@@ -302,10 +301,10 @@ export async function initializeGlobe() {
             { lat: 18.4655, lng: -66.1057,  label: 'Puerto Rico' }, //PR
             { lat: 20.6534, lng: -105.2253,  label: 'Puerto Vallarta' }  // Puerto Vallarta
         ])
-        .objectThreeObject(data => {
-            console.log(data.label)
-            return modelCache[data.label].clone();  // Use a clone of the loaded model
-        })
+        // .objectThreeObject(data => {
+        //     console.log(data.label)
+        //     return modelCache[data.label].clone();  // Use a clone of the loaded model
+        // })
         // .objectLabel(obj => `<div style="
         //     font-family: 'Helvetica', 'Arial', sans-serif;
         //     color: black;
@@ -647,6 +646,8 @@ sequentialArcs(cityPairs);
         // renderer.render(scene, camera);
 
         globe.renderer().render(globe.scene(), globe.camera());
+
+        
 
 
         // globe.camera().lookAt();

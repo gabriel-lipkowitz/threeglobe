@@ -642,7 +642,7 @@ sequentialArcs(cityPairs);
 
             
 
-        globe.renderer().render(globe.scene(), globe.camera());
+        // globe.renderer().render(globe.scene(), globe.camera());
 
         // renderer.render(scene, camera);
 
@@ -657,9 +657,9 @@ sequentialArcs(cityPairs);
 
       };
 
-      Object.keys(cities).forEach(label => {
-        animateModelScale(label);
-    });
+    //   Object.keys(cities).forEach(label => {
+    //     animateModelScale(label);
+    // });
 
         // Define your points of view with durations
         const lookAts  = [

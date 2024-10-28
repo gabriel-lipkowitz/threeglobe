@@ -3,7 +3,6 @@ import { TrackballControls } from './TrackballControls.js';
 import { OrbitControls } from './OrbitControls.js';
 import * as THREE from 'three';
 import { GLTFLoader } from './GLTFLoader.js';
-import Globe from 'globe.gl'
 // import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm//three@0.165.0/examples/jsm/loaders/GLTFLoader.js'
 
 const models = {
@@ -133,8 +132,6 @@ const cities = {
     'Augusta': { lat: 44.3106, lng: -69.7795, visits: 1, duration: 1, start: 12 }
 };
 
-
-
 const camera = new THREE.PerspectiveCamera();
 camera.aspect = window.innerWidth/window.innerHeight;
 camera.updateProjectionMatrix();
@@ -164,6 +161,7 @@ function onMouseMove(event) {
     // Calculate objects intersecting the picking ray
     const intersects = raycaster.intersectObjects(scene.children, true);
   
+    console.log("intersects ", intersects)
     if (intersects.length > 0) {
       // Get the closest intersected object
       const intersectedObject = intersects[0].object;
@@ -246,14 +244,13 @@ export async function initializeGlobe() {
     const ARC_REL_LEN = 0.7; // relative to whole arc
     const FLIGHT_TIME = 1000;
 
-    // const Globe = new ThreeGlobe()
-    const globe = new Globe()
+    const Globe = new ThreeGlobe()
       .globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg')
     //   .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
     //   .pointAltitude('size')
     //   .pointColor('color')
         .objectFacesSurface(true)
-        .customLayerData([
+        .objectsData([
             { lat: 40.3430, lng: -74.6514, label: 'Princeton' },  // Princeton
             { lat: 37.4275, lng: -122.1697, label: 'Stanford' },   // Stanford
             { lat: 1.3521, lng: 103.8198,  label: 'Singapore' } ,
@@ -302,18 +299,9 @@ export async function initializeGlobe() {
             { lat: 18.4655, lng: -66.1057,  label: 'Puerto Rico' }, //PR
             { lat: 20.6534, lng: -105.2253,  label: 'Puerto Vallarta' }  // Puerto Vallarta
         ])
-        .customThreeObject(data => {
+        .objectThreeObject(data => {
             console.log(data.label)
             return modelCache[data.label].clone();  // Use a clone of the loaded model
-        })
-        .customThreeObjectUpdate((obj, d) => {
-            const cityData = cities[d.label];
-            if (cityData) {
-                const coords = globe.getCoords(cityData.lat, cityData.lng, 0); // Assuming the altitude is 0 if not provided
-                Object.assign(obj.position, coords);
-            } else {
-                console.error('City data not found for:', d.label);
-            }
         })
         // .objectLabel(obj => `<div style="
         //     font-family: 'Helvetica', 'Arial', sans-serif;
@@ -349,11 +337,11 @@ export async function initializeGlobe() {
       .arcDashGap(2)
       .arcDashInitialGap(1)
     //   .arcDashAnimateTime(FLIGHT_TIME)
-        (document.getElementById('globeViz'));
+        // (document.getElementById('globeViz'));
 
-        // scene.add(Globe);
-// scene.add(new THREE.AmbientLight(0xcccccc, 3*Math.PI));
-// scene.add(new THREE.DirectionalLight(0xffffff, 3 * Math.PI));
+        scene.add(Globe);
+scene.add(new THREE.AmbientLight(0xcccccc, 3*Math.PI));
+scene.add(new THREE.DirectionalLight(0xffffff, 3 * Math.PI));
 
         let camera_anim = gsap.timeline();
 
@@ -396,11 +384,11 @@ export async function initializeGlobe() {
 
             // Add and remove arc after 1 cycle
             const arc = { startLat, startLng, endLat, endLng };
-            globe.arcsData([...globe.arcsData(), arc]);
+            Globe.arcsData([...Globe.arcsData(), arc]);
 
             // Remove the arc after 2 cycles (adjust timing as needed)
             setTimeout(() => {
-                globe.arcsData(globe.arcsData().filter(d => d !== arc));
+                Globe.arcsData(Globe.arcsData().filter(d => d !== arc));
             }, duration * 2);
         }
 
@@ -483,7 +471,7 @@ sequentialArcs(cityPairs);
           });
         
           arcsData = arcsData.filter(arc => currentTime < arc.removeAfter);
-          globe.arcsData(arcsData);
+          Globe.arcsData(arcsData);
       
         }
 
@@ -580,18 +568,18 @@ sequentialArcs(cityPairs);
 
     
 
-    // const renderer = new THREE.WebGLRenderer();
-    // renderer.setSize(window.innerWidth, window.innerHeight);
-    // document.getElementById('globeViz').appendChild(renderer.domElement);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById('globeViz').appendChild(renderer.domElement);
 
     
 
     
 
-    // const tbControls = new TrackballControls(camera, renderer.domElement);
-    // tbControls.minDistance = 101;
-    // tbControls.rotateSpeed = 5;
-    // tbControls.zoomSpeed = 0.8;
+    const tbControls = new TrackballControls(camera, renderer.domElement);
+    tbControls.minDistance = 101;
+    tbControls.rotateSpeed = 5;
+    tbControls.zoomSpeed = 0.8;
 
 
     canvas1 = document.createElement('canvas');
@@ -624,7 +612,7 @@ sequentialArcs(cityPairs);
 
         requestAnimationFrame(function loop(time) {
 
-            // tbControls.update();
+            tbControls.update();
 
             const now = Date.now();
 
@@ -645,15 +633,15 @@ sequentialArcs(cityPairs);
             }
 
 
-        globe.customThreeObject(data => {
+        Globe.objectThreeObject(data => {
           return modelCache[data.label].clone();  // Use a clone of the loaded model
         })
 
         // globe.camera().lookAt(target); // Orient camera to look at next point
         // globe.camera().lookAt(smoothLookAt);
-        globe.renderer().render(globe.scene(), globe.camera());
+        // globe.renderer().render(globe.scene(), globe.camera());
 
-        // renderer.render(scene, camera);
+        renderer.render(scene, camera);
 
 
         // globe.camera().lookAt();

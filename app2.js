@@ -596,13 +596,13 @@ sequentialArcs(cityPairs);
 	texture1 = new THREE.Texture(canvas1) 
 	texture1.needsUpdate = true;
 	
-    globe.objectThreeObject(data => {
-        return modelCache[data.label].clone();  // Use a clone of the loaded model
-      })
+    
 
       function animate() {
 
-        
+        globe.objectThreeObject(data => {
+            return modelCache[data.label].clone();  // Use a clone of the loaded model
+          })
 
         const lookAts = [
             { city: 'charlottesville', lookAt: cvilleTarget, duration: 10000 }, // Duration in milliseconds

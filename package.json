@@ -3,10 +3,8 @@
   "scripts": {
 
     "dev": "vite --host 127.0.0.1",
-    "build": "vite build",
-    "start": "serve dist -s -l $PORT"
 
-    
+    "start": "node server.js"
 
   },
 
@@ -17,6 +15,8 @@
     "express": "^4.21.1",
 
     "globe.gl": "^2.33.1",
+
+    "serve": "^14.2.4",
 
     "three": "^0.169.0",
 

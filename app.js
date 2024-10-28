@@ -3,7 +3,7 @@ import { TrackballControls } from './TrackballControls.js';
 import { OrbitControls } from './OrbitControls.js';
 import * as THREE from 'three';
 import { GLTFLoader } from './GLTFLoader.js';
-import Globe from 'globe.gl';
+// import Globe from 'globe.gl';
 
 // import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm//three@0.165.0/examples/jsm/loaders/GLTFLoader.js'
 

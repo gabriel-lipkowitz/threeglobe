@@ -13,8 +13,13 @@ const gData = [...Array(N).keys()].map(() => ({
 const loader = new THREE.TextureLoader();
 
 // Load a texture
-const texture = loader.load('./us_.png');  // Replace 'path_to_your_texture.jpg' with the path to your texture file
+// const texture = loader.load('./us_.png');  // Replace 'path_to_your_texture.jpg' with the path to your texture file
 
+const texture = loader.load('./us_.png', function() {
+    console.log('Texture loaded successfully');
+  }, undefined, function(error) {
+    console.log('Error loading texture:', error);
+  });
 
 const world = Globe({ rendererConfig: { precision: 'mediump', antialias: 'false' }})
   (document.getElementById('globeViz'))

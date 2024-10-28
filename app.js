@@ -339,6 +339,17 @@ export async function initializeGlobe() {
             const cityData = cities[d.label];
             if (cityData) {
                 const coords = globe.getCoords(cityData.lat, cityData.lng, 0); // Assuming the altitude is 0 if not provided
+                
+                const texture = textureLoader.load('./us_.png', (tex) => {
+                    obj.traverse((child) => {
+                        if (child.isMesh) {
+                            console.log("mapp")
+                            child.material.map = tex;
+                            child.material.needsUpdate = true;
+                        }
+                    });
+                });
+
                 Object.assign(obj.position, coords);
             } else {
                 console.error('City data not found for:', d.label);

@@ -68,7 +68,7 @@ function preloadModels(callback) {
             model.scale.set(0,0,0); // Initial scale
             model.position.set(0, 0, -1);
             
-            const texture = textureLoader.load('./us_.png', (tex) => {
+            const texture = textureLoader.load('./dist/us_.png', (tex) => {
                 model.traverse((child) => {
                     if (child.isMesh) {
                         console.log("mapp")
@@ -166,7 +166,7 @@ const raycaster = new THREE.Raycaster();
 var INTERSECTED;
 
 function updateTextureForObject(object, flagKey) {
-    const texturePath = './us_.png';
+    const texturePath = './dist/us_.png';
     if (texturePath) {
         const texture = textureLoader.load(texturePath);
         object.traverse((child) => {
@@ -680,7 +680,7 @@ sequentialArcs(cityPairs);
           
             let model = modelCache[data.label].clone()
 
-            const texture = textureLoader.load('./us_.png', (tex) => {
+            const texture = textureLoader.load('./dist/us_.png', (tex) => {
                 model.traverse((child) => {
                     if (child.isMesh) {
                         console.log("mapp")
@@ -698,7 +698,7 @@ sequentialArcs(cityPairs);
             if (cityData) {
                 const coords = globe.getCoords(cityData.lat, cityData.lng, 0); // Assuming the altitude is 0 if not provided
                 
-                const texture = textureLoader.load('./us_.png', (tex) => {
+                const texture = textureLoader.load('./dist/us_.png', (tex) => {
                     obj.traverse((child) => {
                         if (child.isMesh) {
                             console.log("mapp")

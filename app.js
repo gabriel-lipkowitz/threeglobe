@@ -55,6 +55,8 @@ function setModelScale(type, x, y, z) {
 
 const loadedModels = new Map();
 
+const textureLoader = new THREE.TextureLoader();
+
 function preloadModels(callback) {
     const typeEntries = Object.entries(models);
     let loadedCount = 0;
@@ -66,6 +68,16 @@ function preloadModels(callback) {
             model.scale.set(0,0,0); // Initial scale
             model.position.set(0, 0, -1);
             
+            const texture = textureLoader.load('./us_.png', (tex) => {
+                model.traverse((child) => {
+                    if (child.isMesh) {
+                        console.log("mapp")
+                        child.material.map = tex;
+                        child.material.needsUpdate = true;
+                    }
+                });
+            });
+
             // Iterate over labelToTypeMap to store clones in modelCache for each label
             Object.keys(labelToTypeMap).forEach(label => {
                 if (labelToTypeMap[label] === type) {
@@ -152,6 +164,19 @@ const raycaster = new THREE.Raycaster();
 // const mouse = new THREE.Vector2();
 
 var INTERSECTED;
+
+function updateTextureForObject(object, flagKey) {
+    const texturePath = './us_.png';
+    if (texturePath) {
+        const texture = textureLoader.load(texturePath);
+        object.traverse((child) => {
+            if (child.isMesh) {
+                child.material.map = texture;
+                child.material.needsUpdate = true;
+            }
+        });
+    }
+}
 
 function onMouseMove(event) {
     event.preventDefault();
@@ -304,6 +329,10 @@ export async function initializeGlobe() {
         ])
         .customThreeObject(data => {
             console.log(data.label)
+
+
+
+
             return modelCache[data.label].clone();  // Use a clone of the loaded model
         })
         .customThreeObjectUpdate((obj, d) => {

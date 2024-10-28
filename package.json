@@ -2,11 +2,7 @@
 
   "scripts": {
 
-    "dev": "vite --host 127.0.0.1",
-
-    "build": "vite build",
-
-    "start": "serve -s dist"
+    "dev": "vite --host 127.0.0.1"
 
   },
 

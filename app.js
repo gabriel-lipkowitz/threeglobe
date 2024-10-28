@@ -3,7 +3,7 @@ import { TrackballControls } from './TrackballControls.js';
 import { OrbitControls } from './OrbitControls.js';
 import * as THREE from 'three';
 import { GLTFLoader } from './GLTFLoader.js';
-import Globe from 'globe.gl'
+// import Globe from 'globe.gl'
 // import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm//three@0.165.0/examples/jsm/loaders/GLTFLoader.js'
 
 const models = {
@@ -63,7 +63,7 @@ function preloadModels(callback) {
     typeEntries.forEach(([type, url]) => {
         loader.load(url, gltf => {
             const model = gltf.scene;
-            model.scale.set(0,0,0); // Initial scale
+            // model.scale.set(0,0,0); // Initial scale
             model.position.set(0, 0, -1);
             
             // Iterate over labelToTypeMap to store clones in modelCache for each label
@@ -594,126 +594,92 @@ sequentialArcs(cityPairs);
 	texture1.needsUpdate = true;
 	
 
-      function animate() {
+    //   function animate() {
 
         
 
-        const lookAts = [
-            { city: 'charlottesville', lookAt: cvilleTarget, duration: 10000 }, // Duration in milliseconds
-            { city: 'princeton', lookAt: ptonTarget, duration: 5000 },
-            { city: 'london', lookAt: londonTarget, duration: 5000 }
-        ];
+    //     const lookAts = [
+    //         { city: 'charlottesville', lookAt: cvilleTarget, duration: 10000 }, // Duration in milliseconds
+    //         { city: 'princeton', lookAt: ptonTarget, duration: 5000 },
+    //         { city: 'london', lookAt: londonTarget, duration: 5000 }
+    //     ];
     
-        let currentIndex = 0;
-        let lastChangeTime = Date.now();
-        let target = lookAts[0].lookAt;
+    //     let currentIndex = 0;
+    //     let lastChangeTime = Date.now();
+    //     let target = lookAts[0].lookAt;
 
-        // Helper vector to store the interpolated lookAt position
-        const smoothLookAt = new THREE.Vector3().copy(target);
+    //     // Helper vector to store the interpolated lookAt position
+    //     const smoothLookAt = new THREE.Vector3().copy(target);
 
-        requestAnimationFrame(function loop(time) {
+    //     // globe.objectThreeObject(data => {
+    //     //     return modelCache[data.label].clone();  // Use a clone of the loaded model
+    //     //   })
 
-            // tbControls.update();
+    //     // requestAnimationFrame(function loop(time) {
 
-            const now = Date.now();
+    //     //     // tbControls.update();
 
-            if (now - lastChangeTime > lookAts[currentIndex].duration) {
-                currentIndex = (currentIndex + 1) % lookAts.length; // Move to the next target
-                const newTarget = lookAts[currentIndex].lookAt; // Update to the next lookAt target
+    //     //     const now = Date.now();
+
+    //     //     if (now - lastChangeTime > lookAts[currentIndex].duration) {
+    //     //         currentIndex = (currentIndex + 1) % lookAts.length; // Move to the next target
+    //     //         const newTarget = lookAts[currentIndex].lookAt; // Update to the next lookAt target
     
-                // Smoothly animate the camera's lookAt using GSAP
-                gsap.to(smoothLookAt, {
-                    x: newTarget.x,
-                    y: newTarget.y,
-                    z: newTarget.z,
-                    duration: lookAts[currentIndex].duration / 1000, // Convert to seconds for GSAP
-                    ease: "power2.inOut"
-                });
+    //     //         // Smoothly animate the camera's lookAt using GSAP
+    //     //         gsap.to(smoothLookAt, {
+    //     //             x: newTarget.x,
+    //     //             y: newTarget.y,
+    //     //             z: newTarget.z,
+    //     //             duration: lookAts[currentIndex].duration / 1000, // Convert to seconds for GSAP
+    //     //             ease: "power2.inOut"
+    //     //         });
     
-                lastChangeTime = now; // Reset the timer
-            }
+    //     //         lastChangeTime = now; // Reset the timer
+    //     //     }
 
 
-        globe.objectThreeObject(data => {
-          return modelCache[data.label].clone();  // Use a clone of the loaded model
-        })
+        
 
-        // globe.camera().lookAt(target); // Orient camera to look at next point
-        // globe.camera().lookAt(smoothLookAt);
-        globe.renderer().render(globe.scene(), globe.camera());
+    //     // // globe.camera().lookAt(target); // Orient camera to look at next point
+    //     // // globe.camera().lookAt(smoothLookAt);
+    //     // // globe.renderer().render(globe.scene(), globe.camera());
 
+    //     // // renderer.render(scene, camera);
+
+
+    //     // // globe.camera().lookAt();
+        
+    //     // requestAnimationFrame(loop)
+
+    //     // })
+
+        
+
+
+    //   };
+
+    //   Object.keys(cities).forEach(label => {
+    //     animateModelScale(label);
+    // });
+
+    //     // Define your points of view with durations
+    //     const lookAts  = [
+    //         { city: 'charlottesville', lookAt: cvilleTarget },
+    //         { city: 'princeton', lookAt: ptonTarget },
+    //         { city: 'london', lookAt: londonTarget }
+    //     ];
+
+    
+        
+    //   animate();
+
+      (function animate() { // IIFE
+        // Frame cycle
+        // tbControls.update();
         // renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      })();
 
-
-        // globe.camera().lookAt();
-        
-        requestAnimationFrame(loop)
-
-        })
-
-        
-
-
-      };
-
-      Object.keys(cities).forEach(label => {
-        animateModelScale(label);
-    });
-
-        // Define your points of view with durations
-        const lookAts  = [
-            { city: 'charlottesville', lookAt: cvilleTarget },
-            { city: 'princeton', lookAt: ptonTarget },
-            { city: 'london', lookAt: londonTarget }
-        ];
-
-        // Setup renderer
-    
-    
-
-    
-
-    // const ptonTarget = new THREE.Vector3(-74.0416446700265904, 65.88, 20.2);
-
-        // const loaderB = new GLTFLoader();
-
-        // loaderB.load(
-        //   // resource URL
-        //   './models/stanford.glb',
-        //   // called when the resource is loaded
-        //   function ( gltf ) {
-        //     // gltf.scene.scale.set(100,100,100)
-        //     gltf.scene.position.set(ptonTarget.x,ptonTarget.y,ptonTarget.z)
-        //     gltf.scene.scale.set(100,100,100)
-        //     scene.add( gltf.scene );
-        
-        
-        //   },
-        //   // called while loading is progressing
-        //   function ( xhr ) {
-        
-        //     console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-        
-        //   },
-        //   // called when loading has errors
-        //   function ( error ) {
-        
-        //     console.log( 'An error happened' );
-        
-        //   }
-        // );
-
-    // Setup camera
-    
-        
-      animate();
-
-    //   (function animate() { // IIFE
-    //     // Frame cycle
-    //   //   tbControls.update();
-    //     renderer.render(scene, camera);
-    //     requestAnimationFrame(animate);
-    //   })();
 }
 
 preloadModels(initializeGlobe);

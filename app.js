@@ -1,8 +1,10 @@
-import ThreeGlobe from "three-globe";
+import Threeglobe from "three-globe";
 import { TrackballControls } from './TrackballControls.js';
 import { OrbitControls } from './OrbitControls.js';
 import * as THREE from 'three';
 import { GLTFLoader } from './GLTFLoader.js';
+import Globe from 'globe.gl';
+
 // import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm//three@0.165.0/examples/jsm/loaders/GLTFLoader.js'
 
 const models = {
@@ -29,21 +31,19 @@ const models = {
 
 const modelCache = {};
 const loader = new GLTFLoader();
-let camera, renderer, scene, canvas;
+let renderer, canvas;
 let rotationVelocity = 0;
 
 const mouse = {
-  x: undefined,
-  y: undefined
-}
+    x: 0,
+    y: 0,
+    down: false
+  }
 
 var mouseDown = false,
 mouseX = 0,
 mouseY = 0;
 
-
-const raycaster = new THREE.Raycaster();
-const mouseVector = new THREE.Vector2();
 
 function setModelScale(type, x, y, z) {
   const model = modelCache[type];
@@ -134,6 +134,62 @@ const cities = {
     'Augusta': { lat: 44.3106, lng: -69.7795, visits: 1, duration: 1, start: 12 }
 };
 
+const camera = new THREE.PerspectiveCamera();
+camera.aspect = window.innerWidth/window.innerHeight;
+camera.updateProjectionMatrix();
+camera.position.z = 500;
+
+var projector = { x: 0, y: 0 };
+var sprite1;
+var canvas1, context1, texture1;
+
+// Setup scene
+const scene = new THREE.Scene();
+
+
+const raycaster = new THREE.Raycaster();
+// const mouse = new THREE.Vector2();
+
+var INTERSECTED;
+
+function onMouseMove(event) {
+    event.preventDefault();
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  
+    // Update the picking ray with the camera and mouse position
+    raycaster.setFromCamera(mouse, camera);
+  
+    // Calculate objects intersecting the picking ray
+    const intersects = raycaster.intersectObjects(scene.children, true);
+  
+    if (intersects.length > 0) {
+      // Get the closest intersected object
+      const intersectedObject = intersects[0].object;
+  
+      // Log the name of the intersected object
+      if (intersectedObject.name) {
+        console.log('Detected object:', intersectedObject.name);
+      } else {
+        console.log('Detected an unnamed object.');
+      }
+  
+      // Optionally, highlight the fact that we've detected something without modifying its properties
+      if (INTERSECTED !== intersectedObject) {
+        INTERSECTED = intersectedObject;
+      }
+    } else {
+      // Log that no object is currently intersected
+      if (INTERSECTED) {
+        console.log('No object detected.');
+        INTERSECTED = null;
+      }
+    }
+  }
+
+window.addEventListener('mousemove', onMouseMove);
+  
+
 const labelToTypeMap = {
     'Princeton': 'princeton',
     'Stanford': 'stanford',
@@ -184,12 +240,14 @@ const labelToTypeMap = {
     'Puerto Vallarta': 'mexico'
 };
 
+
 export async function initializeGlobe() {
 
     const ARC_REL_LEN = 0.7; // relative to whole arc
     const FLIGHT_TIME = 1000;
 
-    const Globe = new ThreeGlobe()
+    // const globe = new Threeglobe()
+    const globe = new Globe()
       .globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg')
     //   .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
     //   .pointAltitude('size')
@@ -282,7 +340,11 @@ export async function initializeGlobe() {
       .arcDashGap(2)
       .arcDashInitialGap(1)
     //   .arcDashAnimateTime(FLIGHT_TIME)
-        // (document.getElementById('globeViz'));
+        (document.getElementById('globeViz'));
+
+        // scene.add(globe);
+globe.scene().add(new THREE.AmbientLight(0xcccccc, 3*Math.PI));
+globe.scene().add(new THREE.DirectionalLight(0xffffff, 3 * Math.PI));
 
         let camera_anim = gsap.timeline();
 
@@ -325,11 +387,11 @@ export async function initializeGlobe() {
 
             // Add and remove arc after 1 cycle
             const arc = { startLat, startLng, endLat, endLng };
-            Globe.arcsData([...Globe.arcsData(), arc]);
+            globe.arcsData([...globe.arcsData(), arc]);
 
             // Remove the arc after 2 cycles (adjust timing as needed)
             setTimeout(() => {
-                Globe.arcsData(Globe.arcsData().filter(d => d !== arc));
+                globe.arcsData(globe.arcsData().filter(d => d !== arc));
             }, duration * 2);
         }
 
@@ -412,11 +474,11 @@ sequentialArcs(cityPairs);
           });
         
           arcsData = arcsData.filter(arc => currentTime < arc.removeAfter);
-          Globe.arcsData(arcsData);
+          globe.arcsData(arcsData);
       
         }
 
-        // Globe.onObjectClick((obj, event, { lat, lng, altitude }) => {
+        // globe.onObjectClick((obj, event, { lat, lng, altitude }) => {
         //     console.log(`Clicked on ${obj.label}: Latitude ${lat}, Longitude ${lng}, Altitude ${altitude}`);
         
         //     // Define the new target position
@@ -434,7 +496,7 @@ sequentialArcs(cityPairs);
         //         ease: "power2.inOut",  // Smooth easing
         //         onUpdate: () => {
         //             // Update the globe camera point of view gradually
-        //             Globe.pointOfView(currentPosition);
+        //             globe.pointOfView(currentPosition);
         //         }
         //     });
         
@@ -509,25 +571,30 @@ sequentialArcs(cityPairs);
 
     
 
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.getElementById('globeViz').appendChild(renderer.domElement);
+    // const renderer = new THREE.WebGLRenderer();
+    // renderer.setSize(window.innerWidth, window.innerHeight);
+    // document.getElementById('globeViz').appendChild(renderer.domElement);
 
-    // Setup scene
-    const scene = new THREE.Scene();
-    scene.add(Globe);
-    scene.add(new THREE.AmbientLight(0xcccccc, 3*Math.PI));
-    scene.add(new THREE.DirectionalLight(0xffffff, 3 * Math.PI));
+    
 
-    const camera = new THREE.PerspectiveCamera();
-    camera.aspect = window.innerWidth/window.innerHeight;
-    camera.updateProjectionMatrix();
-    camera.position.z = 500;
+    
 
-    const tbControls = new TrackballControls(camera, renderer.domElement);
-    tbControls.minDistance = 101;
-    tbControls.rotateSpeed = 5;
-    tbControls.zoomSpeed = 0.8;
+    // const tbControls = new TrackballControls(camera, renderer.domElement);
+    // tbControls.minDistance = 101;
+    // tbControls.rotateSpeed = 5;
+    // tbControls.zoomSpeed = 0.8;
+
+
+    canvas1 = document.createElement('canvas');
+    context1 = canvas1.getContext('2d');
+	context1.font = "Bold 20px Arial";
+	context1.fillStyle = "rgba(0,0,0,0.95)";
+    context1.fillText('Hello, world!', 0, 20);
+    
+	// canvas contents will be used for a texture
+	texture1 = new THREE.Texture(canvas1) 
+	texture1.needsUpdate = true;
+	
 
       function animate() {
 
@@ -548,7 +615,7 @@ sequentialArcs(cityPairs);
 
         requestAnimationFrame(function loop(time) {
 
-            tbControls.update();
+            // tbControls.update();
 
             const now = Date.now();
 
@@ -569,7 +636,7 @@ sequentialArcs(cityPairs);
             }
 
 
-        Globe.objectThreeObject(data => {
+        globe.objectThreeObject(data => {
           return modelCache[data.label].clone();  // Use a clone of the loaded model
         })
 
@@ -577,7 +644,9 @@ sequentialArcs(cityPairs);
         // globe.camera().lookAt(smoothLookAt);
         // globe.renderer().render(globe.scene(), globe.camera());
 
-        renderer.render(scene, camera);
+        // renderer.render(scene, camera);
+
+        globe.renderer().render(globe.scene(), globe.camera());
 
 
         // globe.camera().lookAt();
@@ -664,7 +733,7 @@ preloadModels(initializeGlobe);
     //   color: ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)]
     // }));
 
-    // const Globe = new ThreeGlobe()
+    // const globe = new Threeglobe()
     //   .globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg')
     //   .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
     //   .pointsData(gData)
@@ -673,7 +742,7 @@ preloadModels(initializeGlobe);
 
     // setTimeout(() => {
     //   gData.forEach(d => d.size = Math.random());
-    //   Globe.pointsData(gData);
+    //   globe.pointsData(gData);
     // }, 4000);
 
     

@@ -327,34 +327,25 @@ export async function initializeGlobe() {
             { lat: 18.4655, lng: -66.1057,  label: 'Puerto Rico' }, //PR
             { lat: 20.6534, lng: -105.2253,  label: 'Puerto Vallarta' }  // Puerto Vallarta
         ])
-        .customThreeObject(data => {
-            console.log(data.label)
+        // .customThreeObject(data => {
+        //     console.log(data.label)
 
 
+        //     let model = modelCache[data.label].clone()
 
+        //     const texture = textureLoader.load('./us_.png', (tex) => {
+        //         model.traverse((child) => {
+        //             if (child.isMesh) {
+        //                 console.log("mapp")
+        //                 child.material.map = tex;
+        //                 child.material.needsUpdate = true;
+        //             }
+        //         });
+        //     });
 
-            return modelCache[data.label].clone();  // Use a clone of the loaded model
-        })
-        .customThreeObjectUpdate((obj, d) => {
-            const cityData = cities[d.label];
-            if (cityData) {
-                const coords = globe.getCoords(cityData.lat, cityData.lng, 0); // Assuming the altitude is 0 if not provided
-                
-                const texture = textureLoader.load('./us_.png', (tex) => {
-                    obj.traverse((child) => {
-                        if (child.isMesh) {
-                            console.log("mapp")
-                            child.material.map = tex;
-                            child.material.needsUpdate = true;
-                        }
-                    });
-                });
-
-                Object.assign(obj.position, coords);
-            } else {
-                console.error('City data not found for:', d.label);
-            }
-        })
+        //     return model;  // Use a clone of the loaded model
+        // })
+        
         // .objectLabel(obj => `<div style="
         //     font-family: 'Helvetica', 'Arial', sans-serif;
         //     color: black;
@@ -686,12 +677,47 @@ sequentialArcs(cityPairs);
 
 
         globe.customThreeObject(data => {
-          return modelCache[data.label].clone();  // Use a clone of the loaded model
+          
+            let model = modelCache[data.label].clone()
+
+            const texture = textureLoader.load('./us_.png', (tex) => {
+                model.traverse((child) => {
+                    if (child.isMesh) {
+                        console.log("mapp")
+                        child.material.map = tex;
+                        child.material.needsUpdate = true;
+                    }
+                });
+            });
+          
+            return model;  // Use a clone of the loaded model
+        })
+
+        globe.customThreeObjectUpdate((obj, d) => {
+            const cityData = cities[d.label];
+            if (cityData) {
+                const coords = globe.getCoords(cityData.lat, cityData.lng, 0); // Assuming the altitude is 0 if not provided
+                
+                const texture = textureLoader.load('./us_.png', (tex) => {
+                    obj.traverse((child) => {
+                        if (child.isMesh) {
+                            console.log("mapp")
+                            child.material.map = tex;
+                            child.material.needsUpdate = true;
+                        }
+                    });
+                });
+
+                Object.assign(obj.position, coords);
+                
+            } else {
+                console.error('City data not found for:', d.label);
+            }
         })
 
         // globe.camera().lookAt(target); // Orient camera to look at next point
         // globe.camera().lookAt(smoothLookAt);
-        globe.renderer().render(globe.scene(), globe.camera());
+        // globe.renderer().render(globe.scene(), globe.camera());
 
         // renderer.render(scene, camera);
 

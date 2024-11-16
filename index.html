@@ -5,19 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Document</title> -->
     <style>
+
+        @font-face {
+        font-family: "San Francisco";
+        font-weight: 100;
+        src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+        }
+
         body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;  /* Ensures the full height of the viewport */
+            overflow: hidden; /* Prevents scrolling */
+        }
+        #globeViz {  /* Assuming globeViz is the ID for the canvas element */
+            position: fixed;  /* Fixes the canvas across the entire viewport */
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-          margin: 0;
-          padding: 0;
-          overflow: hidden; /* This prevents scrollbars from appearing */
-          display: block;
         }
-        canvas {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
+        
+        /* Button styling */
+
+
+        .ButtonLeft, .ButtonRight {
+    display: flex; /* Use flexbox for centering */
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+    position: relative;
+    margin: 0.5%;
+    padding: 0.352em 1.0em;
+    border: none;
+    border-radius: 1.5em;
+    width: 2.5em;
+    color: #FFFFFF;
+    background: linear-gradient(
+        to bottom,
+        rgba(93, 93, 93, 0),
+        rgba(179, 179, 179, 0.75)
+    );
+    font-family: "Tahoma";
+    font-size: 1.5em; /* Make the arrow larger for emphasis */
+    font-weight: bold;
+    text-decoration: none;
+    outline: none;
+    transition: all 0.5s;
+}
+
+.ButtonLeft::before {
+    content: '\00ab'; /* Left arrow */
+    position: relative;
+    left: 0; /* Set the initial left position */
+    transition: left 0.5s ease; /* Increase transition duration */
+}
+
+.ButtonLeft:hover::before {
+    left: -0.3em; /* Move slightly to the left on hover */
+}
+
+/* Right button with only arrow */
+.ButtonRight::after {
+    content: '\00bb'; /* Right arrow */
+    position: relative;
+    right: 0; /* Set the initial right position */
+    transition: right 0.5s ease; /* Increase transition duration */
+}
+
+.ButtonRight:hover::after {
+    right: -0.3em; /* Move slightly to the right on hover */
+}
+
+/* Disabled button styling */
+.ButtonLeft.disabled, .ButtonRight.disabled {
+    background: rgba(131, 137, 147, 0.3); /* Light gray background for disabled */
+    color: #A9A9A9; /* Light gray text color */
+    cursor: not-allowed; /* Indicate the button is disabled */
+    pointer-events: none; /* Prevent any interaction */
+    opacity: 0.5; /* Make it semi-transparent */
+}
+
+        
+        
+        /* Individual positioning for buttons */
+         /* Positioning for buttons */
+         #updateButton3, #updateButton2 {
+    position: fixed;
+    bottom: 20px; /* Distance from the bottom of the page */
+    left: 50%; /* Start both buttons at the center horizontally */
+    transform: translateX(-50%); /* Center the pair initially */
+    margin: 0 20px; /* Add space between the two buttons */
+}
+
+#updateButton3 {
+    transform: translateX(-120%); /* Shift this button to the left */
+}
+
+#updateButton2 {
+    transform: translateX(-10%); /* Shift this button to the right */
+}
+
+#updateButton3 {
+    left: calc(50% - 80px); /* Shift to the left of center */
+    transform: translateX(-100%);
+}
+
+#updateButton2 {
+    left: calc(50% + 80px); /* Shift to the right of center */
+    transform: translateX(-62%);
+}
       </style>
 
       
@@ -40,8 +136,41 @@
 </head>
 <body>
     <div id="globeViz"></div>
+    
+    <button id="updateButton3" class="ButtonLeft"></button>
+<div id="yearDisplay" style="
+    position: fixed;
+    bottom: 30px;
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Align center */
+    font-family: 'Courier New', monospace;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    opacity: 1;
+    transition: opacity 2s ease;
+">1997</div>
+<button id="updateButton2" class="ButtonRight"></button>
+
+    <!-- <canvas id="globeViz"></canvas> -->
+    
     <div id="time-log"></div>
     <div id="chart"></div>
+
+<div id="cityNameDisplay" style="
+    position: fixed;
+    bottom: 20px;
+    left: 20px; 
+    font-family: 'Courier New', monospace;
+    font-size: 20px;
+    color: white;
+    font-weight: lighter;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+">
+</div>
+
+
     <!-- <canvas class="webgl"></canvas> -->
     <!-- <script type="module" src="./script.js"></script> -->
     <script src="//unpkg.com/d3-dsv"></script>
@@ -60,6 +189,6 @@
 
 
 
-    <script type="module" src="./app3.js"></script>
+    <script type="module" src="./app.js"></script>
 </body>
 </html>

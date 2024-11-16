@@ -8,7 +8,7 @@ console.log("aaaaaa")
 // Serve static files from the 'dist' directory
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.static('./models'));
-
+app.use(express.static('./imgs'));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });

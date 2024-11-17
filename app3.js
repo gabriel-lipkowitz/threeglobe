@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from './GLTFLoader.js';
 
 const models = {
-  'stanford': './stanford.glb',
+  'stanford': './models/stanford.glb',
   // add other models
 };
 const modelCache = {};

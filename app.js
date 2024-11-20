@@ -44,7 +44,7 @@ import {Tween, Group} from 'https://unpkg.com/@tweenjs/tween.js@23.1.3/dist/twee
 // };
 
 const models = {
-    'stanford': './hooverS.glb',
+    'stanford': './hooverSmall.glb',
     'singapore': './singapore.glb',
     'nassau': './nassauSmall.glb',
     'queens': './queens.glb',

@@ -44,7 +44,7 @@ import {Tween, Group} from 'https://unpkg.com/@tweenjs/tween.js@23.1.3/dist/twee
 // };
 
 const models = {
-    'stanford': './hooverSmall.glb',
+    'stanford': './hooverS.glb',
     'singapore': './singapore.glb',
     'nassau': './nassauSmall.glb',
     'queens': './queens.glb',
@@ -1204,30 +1204,30 @@ function animateModelScaleSequentialChildren({label, increment, delay, duration}
         
   
   
-          globe.onObjectClick((obj, event, { lat, lng, altitude }) => {
-              console.log(`Clicked on ${obj.label}: Latitude ${lat}, Longitude ${lng}, Altitude ${altitude}`);
+        //   globe.onObjectClick((obj, event, { lat, lng, altitude }) => {
+        //       console.log(`Clicked on ${obj.label}: Latitude ${lat}, Longitude ${lng}, Altitude ${altitude}`);
           
-              // Define the new target position
-              const target = { lat, lng, altitude: 0.25 };
+        //       // Define the new target position
+        //       const target = { lat, lng, altitude: 0.25 };
           
-              // Get the current camera position to interpolate from
-              const currentPosition = globe.pointOfView();
+        //       // Get the current camera position to interpolate from
+        //       const currentPosition = globe.pointOfView();
           
-              // Animate the transition using gsap
-              gsap.to(currentPosition, {
-                  lat: target.lat,
-                  lng: target.lng,
-                  altitude: target.altitude,  // Adjust the altitude if needed
-                  duration: 2,  // Duration in seconds
-                  ease: "power2.inOut",  // Smooth easing
-                  onUpdate: () => {
-                      // Update the globe camera point of view gradually
-                      globe.pointOfView(currentPosition);
-                  }
-              });
+        //       // Animate the transition using gsap
+        //       gsap.to(currentPosition, {
+        //           lat: target.lat,
+        //           lng: target.lng,
+        //           altitude: target.altitude,  // Adjust the altitude if needed
+        //           duration: 2,  // Duration in seconds
+        //           ease: "power2.inOut",  // Smooth easing
+        //           onUpdate: () => {
+        //               // Update the globe camera point of view gradually
+        //               globe.pointOfView(currentPosition);
+        //           }
+        //       });
           
 
-          });
+        //   });
   
        var camPosIndex = 0;
   

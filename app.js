@@ -6,66 +6,66 @@ import {Tween, Group} from 'https://unpkg.com/@tweenjs/tween.js@23.1.3/dist/twee
   import { OrbitControls } from './OrbitControls.js';
 
 
-  const models = {
-    'stanford': './models/hooverSmall.glb',
-    'singapore': './models/singapore.glb',
-    'nassau': './models/nassauSmall.glb',
-    'queens': './models/queens.glb',
-    'florence': './models/florence.glb',
-    'newYork': './models/newYorkSmall.glb',
-    'la': './models/la.glb',
-    'amsterdam': './models/amsterdam.glb',
-    'paris': './models/paris.glb',
-    'berlin': './models/berlin.glb',
-    'london': './models/londonSmall.glb',
-    'sf': './models/sf.glb',
-    'dc': './models/dc.glb',
-    'uva': './models/uva.glb',
-    'rotunda': './models/rotundaSmall.glb',
-    'charlottesville': './models/charlottesville.glb',
-    'imperial': './models/queensSmall.glb',
-    'trees0': './models/trees0.glb',
-    'trees1': './models/trees1Small.glb',
-    'trees2': './models/trees2.glb',
-    // 'uk': './models/uk.glb',
-    // 'california': './models/california.glb',
-    // 'princeton': './models/pton.glb',
-    // 'swiss': './models/swiss.glb',
-    // 'france': './models/france.glb',
-    // 'germany': './models/germany.glb',
-    // 'holland': './models/holland.glb',
-    // 'hungary': './models/hungary.glb',
-    // 'austria': './models/austria.glb',
-    // 'italy': './models/italy.glb',
-    // 'czech': './models/czech.glb',
-    // 'mexico': './models/mexico.glb',
-     // 'us': './models/us.glb',
-    
-};
-
-// const models = {
-//     'stanford': './hooverSmall.glb',
-//     'singapore': './singapore.glb',
-//     'nassau': './nassauSmall.glb',
-//     'queens': './queens.glb',
-//     'florence': './florence.glb',
-//     'newYork': './newYorkSmall.glb',
-//     'la': './la.glb',
-//     'amsterdam': './amsterdam.glb',
-//     'paris': './paris.glb',
-//     'berlin': './berlin.glb',
-//     'london': './londonSmall.glb',
-//     'sf': './sf.glb',
-//     'dc': './dc.glb',
-//     'uva': './uva.glb',
-//     'rotunda': './rotundaSmall.glb',
-//     'charlottesville': './charlottesville.glb',
-//     'imperial': './queensSmall.glb',
-//     'trees0': './trees0.glb',
-//     'trees1': './trees1Small.glb',
-//     'trees2': './trees2.glb'
+//   const models = {
+//     'stanford': './models/hooverSmall.glb',
+//     'singapore': './models/singapore.glb',
+//     'nassau': './models/nassauSmall.glb',
+//     'queens': './models/queens.glb',
+//     'florence': './models/florence.glb',
+//     'newYork': './models/newYorkSmall.glb',
+//     'la': './models/la.glb',
+//     'amsterdam': './models/amsterdam.glb',
+//     'paris': './models/paris.glb',
+//     'berlin': './models/berlin.glb',
+//     'london': './models/londonSmall.glb',
+//     'sf': './models/sf.glb',
+//     'dc': './models/dc.glb',
+//     'uva': './models/uva.glb',
+//     'rotunda': './models/rotundaSmall.glb',
+//     'charlottesville': './models/charlottesville.glb',
+//     'imperial': './models/queensSmall.glb',
+//     'trees0': './models/trees0.glb',
+//     'trees1': './models/trees1Small.glb',
+//     'trees2': './models/trees2.glb',
+//     // 'uk': './models/uk.glb',
+//     // 'california': './models/california.glb',
+//     // 'princeton': './models/pton.glb',
+//     // 'swiss': './models/swiss.glb',
+//     // 'france': './models/france.glb',
+//     // 'germany': './models/germany.glb',
+//     // 'holland': './models/holland.glb',
+//     // 'hungary': './models/hungary.glb',
+//     // 'austria': './models/austria.glb',
+//     // 'italy': './models/italy.glb',
+//     // 'czech': './models/czech.glb',
+//     // 'mexico': './models/mexico.glb',
+//      // 'us': './models/us.glb',
     
 // };
+
+const models = {
+    'stanford': './hooverSmall.glb',
+    'singapore': './singapore.glb',
+    'nassau': './nassauSmall.glb',
+    'queens': './queens.glb',
+    'florence': './florence.glb',
+    'newYork': './newYorkSmall.glb',
+    'la': './la.glb',
+    'amsterdam': './amsterdam.glb',
+    'paris': './paris.glb',
+    'berlin': './berlin.glb',
+    'london': './londonSmall.glb',
+    'sf': './sf.glb',
+    'dc': './dc.glb',
+    'uva': './uva.glb',
+    'rotunda': './rotundaSmall.glb',
+    'charlottesville': './charlottesville.glb',
+    'imperial': './queensSmall.glb',
+    'trees0': './trees0.glb',
+    'trees1': './trees1Small.glb',
+    'trees2': './trees2.glb'
+    
+};
 
 
 const longLabelMap = {
@@ -381,12 +381,12 @@ const longLabelMap = {
         let isExpanding = false;
       // const Globe = new ThreeGlobe()
       const globe = new Globe()
-        .globeImageUrl('./imgs/8081_earthspec10k-2.png')
-        // .globeImageUrl('./8081_earthspec10k-2.png')
+        // .globeImageUrl('./imgs/8081_earthspec10k-2.png')
+        .globeImageUrl('./8081_earthspec10k-2.png')
         // .globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg')
         // .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
-        .backgroundImageUrl('./imgs/night-sky.png')
-        // .backgroundImageUrl('./night-sky.png')
+        // .backgroundImageUrl('./imgs/night-sky.png')
+        .backgroundImageUrl('./night-sky.png')
       //   .pointAltitude('size')
       //   .pointColor('color')
           .objectFacesSurface(true)

@@ -299,11 +299,9 @@ const longLabelMap = {
   
   window.addEventListener('mousemove', onMouseMove);
     
-  window.addEventListener("resize", event => {
-    globe.camera().aspect = window.innerWidth / window.innerHeight;
-    globe.camera().updateProjectionMatrix();
-    globe.renderer().setSize(window.innerWidth, window.innerHeight);
-});
+
+// Function to handle window resizing
+
 
   const labelToTypeMap = {
       'Princeton': 'nassau',
@@ -691,6 +689,20 @@ const longLabelMap = {
 
           
 
+          function onWindowResize() {
+            // Update camera aspect ratio
+            globe.camera().aspect = window.innerWidth / window.innerHeight;
+            globe.camera().updateProjectionMatrix();
+        
+            // Update renderer size
+            globe.renderer().setSize(window.innerWidth, window.innerHeight);
+        
+            // If you use other controls like OrbitControls or TrackballControls, update them here if necessary
+            tbControls.handleResize();
+        }
+        
+        // Add event listener for resize
+        window.addEventListener('resize', onWindowResize, false);
 
             function findAllLights(scene) {
                 const lights = [];  // Array to hold all lights
@@ -1332,6 +1344,8 @@ function animateModelScaleSequentialChildren({label, increment, delay, duration}
       
   
         function animate() {
+
+            
 
             console.log(globe.lights)
   

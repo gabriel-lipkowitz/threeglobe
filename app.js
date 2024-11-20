@@ -5,79 +5,137 @@ import {Tween, Group} from 'https://unpkg.com/@tweenjs/tween.js@23.1.3/dist/twee
   import { TrackballControls } from './TrackballControls.js';
   import { OrbitControls } from './OrbitControls.js';
 
+
   const models = {
-    'stanford': 'hoover.glb',
-    'singapore': 'singapore.glb',
-    'uk': 'uk.glb',
-    'nassau': 'nassau.glb',
-    'california': 'california.glb',
-    'queens': 'queens.glb',
-    'princeton': 'pton.glb',
-    'swiss': 'swiss.glb',
-    'france': 'france.glb',
-    'germany': 'germany.glb',
-    'holland': 'holland.glb',
-    'hungary': 'hungary.glb',
-    'austria': 'austria.glb',
-    'italy': 'italy.glb',
-    'florence': 'florence.glb',
-    'us': 'us.glb',
-    'newYork': 'newYork.glb',
-    'la': 'la.glb',
-    'amsterdam': 'amsterdam.glb',
-    'paris': 'paris.glb',
-    'berlin': 'berlin.glb',
-    'london': 'london.glb',
-    'sf': 'sf.glb',
-    'dc': 'dc.glb',
-    'uva': 'uva.glb',
-    'rotunda': 'rotunda.glb',
-    'charlottesville': 'charlottesville.glb',
-    'imperial': 'imperial.glb',
-    'czech': 'czech.glb',
-    'mexico': 'mexico.glb',
-    'trees0': 'trees0.glb',
-    'trees1': 'trees1.glb',
-    'trees2': 'trees2.glb'
+    'stanford': './models/hooverSmall.glb',
+    'singapore': './models/singapore.glb',
+    'nassau': './models/nassauSmall.glb',
+    'queens': './models/queens.glb',
+    'florence': './models/florence.glb',
+    'newYork': './models/newYorkSmall.glb',
+    'la': './models/la.glb',
+    'amsterdam': './models/amsterdam.glb',
+    'paris': './models/paris.glb',
+    'berlin': './models/berlin.glb',
+    'london': './models/londonSmall.glb',
+    'sf': './models/sf.glb',
+    'dc': './models/dc.glb',
+    'uva': './models/uva.glb',
+    'rotunda': './models/rotundaSmall.glb',
+    'charlottesville': './models/charlottesville.glb',
+    'imperial': './models/queensSmall.glb',
+    'trees0': './models/trees0.glb',
+    'trees1': './models/trees1Small.glb',
+    'trees2': './models/trees2.glb',
+    // 'uk': './models/uk.glb',
+    // 'california': './models/california.glb',
+    // 'princeton': './models/pton.glb',
+    // 'swiss': './models/swiss.glb',
+    // 'france': './models/france.glb',
+    // 'germany': './models/germany.glb',
+    // 'holland': './models/holland.glb',
+    // 'hungary': './models/hungary.glb',
+    // 'austria': './models/austria.glb',
+    // 'italy': './models/italy.glb',
+    // 'czech': './models/czech.glb',
+    // 'mexico': './models/mexico.glb',
+     // 'us': './models/us.glb',
+    
 };
 
 //   const models = {
-//     'stanford': './models/hoover.glb',
-//     'singapore': './models/singapore.glb',
-//     'uk': './models/uk.glb',
-//     'nassau': './models/nassau.glb',
-//     'california': './models/california.glb',
-//     'queens': './models/queens.glb',
-//     'princeton': './models/pton.glb',
-//     'swiss': './models/swiss.glb',
-//     'france': './models/france.glb',
-//     'germany': './models/germany.glb',
-//     'holland': './models/holland.glb',
-//     'hungary': './models/hungary.glb',
-//     'austria': './models/austria.glb',
-//     'italy': './models/italy.glb',
-//     'florence': './models/florence.glb',
-//     'us': './models/us.glb',
-//     'newYork': './models/newYork.glb',
-//     'la': './models/la.glb',
-//     'amsterdam': './models/amsterdam.glb',
-//     'paris': './models/paris.glb',
-//     'berlin': './models/berlin.glb',
-//     'london': './models/london.glb',
-//     'sf': './models/sf.glb',
-//     'dc': './models/dc.glb',
-//     'uva': './models/uva.glb',
-//     'rotunda': './models/rotunda.glb',
-//     'charlottesville': './models/charlottesville.glb',
-//     'imperial': './models/imperial.glb',
-//     'czech': './models/czech.glb',
-//     'mexico': './models/mexico.glb',
-//     'trees0': './models/trees0.glb',
-//     'trees1': './models/trees1.glb',
-//     'trees2': './models/trees2.glb'
+//     'stanford': 'hoover.glb',
+//     'singapore': 'singapore.glb',
+//     'uk': 'uk.glb',
+//     'nassau': 'nassau.glb',
+//     'california': 'california.glb',
+//     'queens': 'queens.glb',
+//     'princeton': 'pton.glb',
+//     'swiss': 'swiss.glb',
+//     'france': 'france.glb',
+//     'germany': 'germany.glb',
+//     'holland': 'holland.glb',
+//     'hungary': 'hungary.glb',
+//     'austria': 'austria.glb',
+//     'italy': 'italy.glb',
+//     'florence': 'florence.glb',
+//     'us': 'us.glb',
+//     'newYork': 'newYork.glb',
+//     'la': 'la.glb',
+//     'amsterdam': 'amsterdam.glb',
+//     'paris': 'paris.glb',
+//     'berlin': 'berlin.glb',
+//     'london': 'london.glb',
+//     'sf': 'sf.glb',
+//     'dc': 'dc.glb',
+//     'uva': 'uva.glb',
+//     'rotunda': 'rotunda.glb',
+//     'charlottesville': 'charlottesville.glb',
+//     'imperial': 'imperial.glb',
+//     'czech': 'czech.glb',
+//     'mexico': 'mexico.glb',
+//     'trees0': 'trees0.glb',
+//     'trees1': 'trees1.glb',
+//     'trees2': 'trees2.glb'
 // };
 
-  
+
+const longLabelMap = {
+    'Princeton': 'Princeton University: I did my undergraduate here, studied biology.',
+    'Stanford': 'Stanford University, I did my PhD here, studied engineering.',
+    'Singapore': 'Singapore, I work here now at NUS as an assistant professor!',
+    'Charlottesville': 'Charlottesville, I grew up here!',
+    'UVA': 'University of Virginia, where my mother is a professor of art and architecture.',
+    'London': 'London, where I moved after graduating.',
+    'Paris': 'Paris, the first place in Europe I visited.',
+    'Geneva': 'Geneva, I visited here with my high school orchestra.',
+    'Orlando': 'Orlando, I went here with my high school orchestra.',
+    'Ithaca': 'Ithaca, New York, where I was born.',
+    'Toms River': 'Toms River, where my grandmother lived.',
+    'Los Angeles': 'Los Angeles. I visited a couple times on vacation during my PhD.',
+    'Seattle': 'Seattle. ACM SCF 2022.',
+    'Austin': 'Austin, Texas. SFF 2022 and 2023.',
+    'Houston': 'Houston, I visited here with my parents as a kid.',
+    'Berkeley': 'UC Berkeley. Many friends from PhD studied here.',
+    'Cupertino': 'Cupertino. HQ of Apple, where my partner works!',
+    'Chicago': 'Chicago, I visited on vacation during PhD.',
+    'Philadelphia': 'Philadelphia, I visited on vacation during undergrad.',
+    'Pittsburgh': 'Pittsburgh. ACM UIST 2024.',
+    'Ann Arbor': 'Ann Arbor, Michigan, I gave a guest talk here at UMichigan',
+    'New York City': 'New York City, where my grandparents lived.',
+    'Outer Banks': 'The Outer Banks, I visited with friends after graduating from high school.',
+    'San Diego': 'San Diego, I spoke at a conference here in 2022.',
+    'San Francisco': 'San Francisco, maybe my favorite city. I lived here in 2024.',
+    'Hamburg': 'Hamburg, Germany. ACM CHI 2023.',
+    'Trier': 'Trier, Germany. ACM SUI 2024.',
+    'Amsterdam': 'Amsterdam, near where extended family lives.',
+    'Imperial': 'Imperial College London, where I did a masters in CS.',
+    'Oxford': 'Oxford, visited during my masters.',
+    'Cambridge': 'Cambridge, visited during my masters.',
+    'Berlin': 'Berlin. Many friends and family friends here.',
+    'Honolulu': 'Honolulu, Hawaii. ACM CHI 2023.',
+    'Washington, DC': 'Washington, DC, where I visited many times with family growing up.',
+    'Radford': 'Radford, Virginia, I did a summer camp here before high school.',
+    'Virginia Beach': 'Virginia Beach, I played soccer here growing up.',
+    'Rotterdam': 'Rotterdam, the Netherlands, near where extended family lives.',
+    'Baltimore': 'Baltimore, my favorite (American) football team was from here.',
+    'Yosemite': 'Yosemite, I hiked and backpacked here at the end of my PhD.',
+    'Lake Tahoe': 'Lake Tahoe, I skiied here during my PhD.',
+    'Richmond': 'Richmond, Virginia, I did an art summer camp here growing up.',
+    'Puerto Rico': 'Puerto Rico, I visited here with friends at the end of college.',
+    'Puerto Vallarta': 'Puerto Vallarta, Mexico. I visited here with my extended family a couple times growing up.',
+    'Milan': 'Milan. Part of an Italy trip I did with friends at the end of college.',
+    'Venice': 'Venice. Part of an Italy trip I did with friends at the end of college.',
+    'Rome': 'Rome. Part of an Italy trip I did with friends at the end of college.',
+    'Florence': 'Florence. Part of an Italy trip I did with friends at the end of college.',
+    'Vienna': 'Vienna. Part of a central Europe trip I did with friends in college.',
+    'Prague': 'Prague. Part of a central Europe trip I did with friends in college.',
+    'Budapest': 'Budapest. Part of a central Europe trip I did with friends in college.',
+    'Boston': 'Boston. I did an internship during college here.',
+    'Augusta': 'Augusta. I did an internship during college here.',
+    'Tokyo': 'Tokyo, I visited here with my partner en route to moving to Singapore.',
+    'Kyoto': 'Kyoto, I visited here with my partner en route to moving to Singapore.'
+};
   
   
   const modelCache = {};
@@ -149,6 +207,8 @@ import {Tween, Group} from 'https://unpkg.com/@tweenjs/tween.js@23.1.3/dist/twee
       'Stanford': { lat: 37.4275, lng: -121.5697, visits: 4, duration: 5, start: 20.5 },
       'Singapore': { lat: 1.3521, lng: 103.8198, visits: 4, duration: 5, start: 25.5 },
       'Charlottesville': { lat: 38.0293, lng: -78.4767, visits: 4, duration: 10, start: 0.5 },
+      'Tokyo': { lat: 35.6895, lng: 139.6917, visits: 5, duration: 6, start: 30.0 },  // New Entry
+    'Kyoto': { lat: 35.0116, lng: 135.7681, visits: 3, duration: 4, start: 32.5 },
       'UVA': { lat: 38.0293, lng: -78.4767, visits: 4, duration: 10, start: 0.5 },
       'London': { lat: 51.5074, lng: -0.1278, visits: 4, duration: 5, start: 15.5 },
       'Paris': { lat: 48.8566, lng: 2.3522, visits: 1, duration: 1, start: 5 },
@@ -256,6 +316,8 @@ import {Tween, Group} from 'https://unpkg.com/@tweenjs/tween.js@23.1.3/dist/twee
       'Princeton': 'nassau',
       'Stanford': 'stanford',
       'Singapore': 'singapore',
+      'Tokyo': 'trees2',
+      'Kyoto': 'trees2',
       'Charlottesville': 'charlottesville',
       'UVA': 'rotunda',
       'London': 'london',
@@ -324,12 +386,12 @@ import {Tween, Group} from 'https://unpkg.com/@tweenjs/tween.js@23.1.3/dist/twee
         let isExpanding = false;
       // const Globe = new ThreeGlobe()
       const globe = new Globe()
-        // .globeImageUrl('./imgs/8081_earthspec10k-2.png')
-        .globeImageUrl('./8081_earthspec10k-2.png')
+        .globeImageUrl('./imgs/8081_earthspec10k-2.png')
+        // .globeImageUrl('./8081_earthspec10k-2.png')
         // .globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg')
-        .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
-        // .backgroundImageUrl('./imgs/night-sky.png')
-        .backgroundImageUrl('./night-sky.png')
+        // .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+        .backgroundImageUrl('./imgs/night-sky.png')
+        // .backgroundImageUrl('./night-sky.png')
       //   .pointAltitude('size')
       //   .pointColor('color')
           .objectFacesSurface(true)
@@ -338,6 +400,8 @@ import {Tween, Group} from 'https://unpkg.com/@tweenjs/tween.js@23.1.3/dist/twee
           .objectsData([
               { lat: 40.6430, lng: -74.6514, label: 'Princeton' },  // Princeton
               { lat: 37.4275, lng: -121.5697, label: 'Stanford' },   // Stanford
+              { lat: 35.6895, lng: 139.6917, label: 'Tokyo' },
+              { lat: 35.0116, lng: 135.7681, label: 'Kyoto' },
               { lat: 1.3521, lng: 103.8198,  label: 'Singapore' } ,
               { lat: 38.0293, lng: -78.4767, label: 'Charlottesville' },  // Charlottesville
               { lat: 38.0293, lng: -78.4767, label: 'UVA' },
@@ -392,28 +456,35 @@ import {Tween, Group} from 'https://unpkg.com/@tweenjs/tween.js@23.1.3/dist/twee
               { lat: 20.6534, lng: -104.2253,  label: 'Puerto Vallarta' }  // Puerto Vallarta
           ])
           .objectThreeObject(data => {
-              console.log(data.label)
+            //   console.log(data.label)
               return modelCache[data.label].clone();  // Use a clone of the loaded model
           })
-          .objectLabel(data => `<div style="
-              font-family: 'Helvetica', 'Arial', sans-serif;
-              color: black;
-              font-size: 14px;  /* Adjust font size as needed */
-              padding: 5px;
-              background: rgba(255, 255, 255, 0.8); /* Optional: Light background to contrast text */
-              border-radius: 5px;
-              box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2); /* Optional: shadow for better visibility */
-          ">${data.label}</div>`)
-        //   .arcsData(arcsData)
-        .arcColor(arc => {
-            return 'grey'; 
+        .objectLabel(data => {
+            const longLabel = longLabelMap[data.label] || data.label; // Fallback to data.label if no mapping exists
+            return `
+                <div style="
+                    font-family: 'Courier New';
+                    color: black;
+                    font-size: 14px;  /* Adjust font size as needed */
+                    padding: 5px;
+                    background: rgba(255, 255, 255, 0.8); /* Optional: Light background to contrast text */
+                    border-radius: 5px;
+                    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2); /* Optional: shadow for better visibility */
+                ">
+                    ${longLabel}
+                </div>
+            `;
         })
-        .arcsTransitionDuration(0)
-        .arcDashLength(ARC_REL_LEN)
-        .arcDashGap(2)
-        .arcDashInitialGap(1)
-        .arcDashAnimateTime(FLIGHT_TIME)
-        .arcStroke(0.05)
+        //   .arcsData(arcsData)
+        // .arcColor(arc => {
+        //     return 'grey'; 
+        // })
+        // .arcsTransitionDuration(0)
+        // .arcDashLength(ARC_REL_LEN)
+        // .arcDashGap(2)
+        // .arcDashInitialGap(1)
+        // .arcDashAnimateTime(FLIGHT_TIME)
+        // .arcStroke(0.05)
         .onObjectHover((obj, prevObj) => {
             // Handle when the mouse moves to an object
             
@@ -616,9 +687,6 @@ import {Tween, Group} from 'https://unpkg.com/@tweenjs/tween.js@23.1.3/dist/twee
         
                 isExpanding = false;  // Update the state to indicate no object is currently expanded
             }
-            
-            
-            
         })
           (document.getElementById('globeViz'));
   
@@ -654,23 +722,24 @@ import {Tween, Group} from 'https://unpkg.com/@tweenjs/tween.js@23.1.3/dist/twee
                 let durationMove;
                 switch (currentIndex) {
                     case 0:
-                        altitude = 0.15;
-                        durationMove = 3;
-                        break;
-                    case 1:
                         altitude = 0.18;
                         durationMove = 3;
                         break;
+                    case 1:
+                        altitude = 0.2;
+                        durationMove = 3;
+                        break;
                     case 2:
-                        altitude = 0.35;
+                        altitude = 0.38;
                         durationMove = 3;
                         break;
                     case 3:
-                        altitude = 0.35;
+                        altitude = 0.38;
                         durationMove = 3;
                         break;
                     default:
-                        altitude = 0.15; // Fallback to a default altitude if needed
+                        durationMove = 3;
+                        altitude = 0.3; // Fallback to a default altitude if needed
                 }
                 
                 // Define the new target position using the data from the cities object
@@ -738,6 +807,12 @@ const cityPairsUSSouth = [
 
 ]
 
+const cityPairsAsia = [
+    { from: 'Singapore', to: 'Singapore', delay, duration, increment: incrementCity, durationCity },
+    { from: 'Singapore', to: 'Tokyo', delay, duration, increment: incrementCity, durationCity },
+    { from: 'Tokyo', to: 'Kyoto', delay, duration, increment: incrementCity, durationCity },
+]
+
 const cityPairsUSEast = [
     { from: 'New York City', to: 'New York City', delay, duration, increment: incrementCity, durationCity },
     { from: 'New York City', to: 'Princeton', delay, duration, increment: incrementCity, durationCity },
@@ -745,7 +820,7 @@ const cityPairsUSEast = [
     { from: 'Boston', to: 'Augusta', delay, duration, increment: incrementCity, durationCity },
     { from: 'Augusta', to: 'Puerto Rico', delay, duration, increment: incrementCity, durationCity },
     { from: 'Puerto Rico', to: 'Toms River', delay, duration, increment: incrementCity, durationCity },
-    { from: 'Toms River, DC', to: 'Pittsburgh', delay, duration, increment: incrementCity, durationCity },
+    { from: 'Toms River', to: 'Pittsburgh', delay, duration, increment: incrementCity, durationCity },
     { from: 'Pittsburgh', to: 'Ann Arbor', delay, duration, increment: incrementCity, durationCity },
     { from: 'Ann Arbor', to: 'Chicago', delay, duration, increment: incrementCity, durationCity },
     { from: 'Chicago', to: 'Philadelphia', delay, duration, increment: incrementCity, durationCity },
@@ -920,7 +995,7 @@ function animateModelScaleSequentialChildren({label, increment, delay, duration}
                 : { lat: 0, lng: 0 };
         
             let totalDelay = 2000; // Track the cumulative delay for sequential calls
-            console.log("currentIndex", currentIndex)
+            // console.log("currentIndex", currentIndex)
 
             // let totalDelay = (currentIndex === 2 || currentIndex === 3) ? 4000 : 2000;
 
@@ -989,7 +1064,8 @@ function animateModelScaleSequentialChildren({label, increment, delay, duration}
             { city: 'Washington, DC', animation: cityPairsUSSouth, played: false },
             { city: 'New York City', animation: cityPairsUSEast, played: false },
             { city: 'London', animation: cityPairsEurope, played: false },
-            { city: 'Stanford', animation: cityPairsUSWest, played: false }
+            { city: 'Stanford', animation: cityPairsUSWest, played: false },
+            { city: 'Singapore', animation: cityPairsAsia, played: false }
             
         ];
 
@@ -1019,7 +1095,8 @@ function animateModelScaleSequentialChildren({label, increment, delay, duration}
             { year: "2010", city: "Charlottesville", played: false },
             { year: "2015", city: "Princeton", played: false },
             { year: "2020", city: "Geneva", played: false },
-            { year: "2024", city: "Stanford", played: false },
+            { year: "2023", city: "Stanford", played: false },
+            { year: "2024", city: "Singapore", played: false },
           ];
           
           let currentIndex = 0;
@@ -1054,13 +1131,13 @@ function animateModelScaleSequentialChildren({label, increment, delay, duration}
           
           document.getElementById("updateButton2").addEventListener("click", () => {
             // if (currentIndex < cityYearPairs.length) {
-              console.log("aaaaaaa")
-            console.log("currentIndex in button before forward", currentIndex)
+            //   console.log("aaaaaaa")
+            // console.log("currentIndex in button before forward", currentIndex)
               playAnimationOrMoveCamera();
               updateUI();
               updateButtonState();
               currentIndex++;
-              console.log("currentIndex in button after forward", currentIndex)
+            //   console.log("currentIndex in button after forward", currentIndex)
             // }
           });
           
@@ -1092,6 +1169,8 @@ function animateModelScaleSequentialChildren({label, increment, delay, duration}
             let reenableDelay = (currentIndex === 3) ? baseDelay * 2 : baseDelay;
 
             reenableDelay = (currentIndex === 4) ? baseDelay * 1.5 : reenableDelay;
+
+            reenableDelay = (currentIndex === 5) ? baseDelay * 0.25 : reenableDelay;
 
     if (cityYearPairs[currentIndex-1].played) {
         reenableDelay = 3000; // Reduce delay if the animation has already been played
@@ -1263,14 +1342,39 @@ function animateModelScaleSequentialChildren({label, increment, delay, duration}
 
             console.log(globe.lights)
   
-            let lights = globe.lights();
+            // Array to hold the lights
+const lights = [];
 
-// Loop through each light and set its intensity to zero
-lights.forEach(light => {
-    light.intensity = 2;
-});
+// Parameters for light placement
+const radius = 300; // Distance of lights from the globe's center
+const intensity = 2; // Intensity of each light
 
-// Update the lights in the globe with the modified intensities
+// Add 8 directional lights distributed evenly around the globe
+for (let i = 0; i < 8; i++) {
+    const angle = (i / 8) * Math.PI * 2; // Divide the sphere into 8 sections
+    const x = radius * Math.cos(angle); // X-coordinate
+    const z = radius * Math.sin(angle); // Z-coordinate
+    const y = (i % 2 === 0) ? radius : -radius; // Alternate between north and south
+
+    // Create a directional light
+    const light = new THREE.DirectionalLight(0xffffff, intensity);
+    light.position.set(x, y, z);
+
+    // Set the light's target to the globe's center
+    light.target.position.set(0, 0, 0);
+    light.target.updateMatrixWorld();
+
+    // Add the light and its target to the scene
+    globe.scene().add(light);
+    globe.scene().add(light.target);
+
+    light.intensity = 1
+
+    // Push to lights array
+    lights.push(light);
+}
+
+// Replace globe's lights with the new array of 8 lights
 globe.lights(lights);
   
           const lookAts = [

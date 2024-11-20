@@ -299,7 +299,12 @@ const longLabelMap = {
   
   window.addEventListener('mousemove', onMouseMove);
     
-  
+  window.addEventListener("resize", event => {
+    globe.camera().aspect = window.innerWidth / window.innerHeight;
+    globe.camera().updateProjectionMatrix();
+    globe.renderer().setSize(window.innerWidth, window.innerHeight);
+});
+
   const labelToTypeMap = {
       'Princeton': 'nassau',
       'Stanford': 'stanford',

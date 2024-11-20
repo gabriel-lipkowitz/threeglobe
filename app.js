@@ -156,6 +156,9 @@ const longLabelMap = {
   function preloadModels(callback) {
       const typeEntries = Object.entries(models);
       let loadedCount = 0;
+
+      const spinner = document.getElementById('loading-spinner');
+    spinner.style.display = 'block';
   
       // Load models based on types
       typeEntries.forEach(([type, url]) => {
@@ -182,6 +185,7 @@ const longLabelMap = {
   
               loadedCount++;
               if (loadedCount === typeEntries.length) {
+                spinner.style.display = 'none';
                   callback(); // All models are loaded, call the callback
               }
           }, undefined, error => {

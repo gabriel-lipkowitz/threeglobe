@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import ThreeGlobe from 'three-globe'
 import { GLTFLoader } from './GLTFLoader.js';
-// import * as Globe from './globe.gl/dist/globe.gl.js'
+// import Globe from './globe.gl.js'
 // import {Tween, Group} from 'https://unpkg.com/@tweenjs/tween.js@23.1.3/dist/tween.esm.js'
   import { TrackballControls } from './TrackballControls.js';
   import { OrbitControls } from './OrbitControls.js';
